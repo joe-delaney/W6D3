@@ -9,6 +9,8 @@
 # dropping tables
 User.destroy_all
 Artwork.destroy_all
+ArtworkShare.destroy_all
+Comment.destroy_all
 
 u1 = User.create(username: 'Luke')
 u2 = User.create(username: 'Leiah')
@@ -24,3 +26,10 @@ artwork_share2 = ArtworkShare.create(artwork_id: artwork1.id, viewer_id: u3.id)
 artwork_share3 = ArtworkShare.create(artwork_id: artwork2.id, viewer_id: u1.id)
 artwork_share4 = ArtworkShare.create(artwork_id: artwork2.id, viewer_id: u3.id)
 artwork_share5 = ArtworkShare.create(artwork_id: artwork3.id, viewer_id: u1.id)
+
+c1 = Comment.create(body: "may the force be with you", artwork_id: artwork1.id, user_id: u2.id)
+c2 = Comment.create(body: "This is Yoda", artwork_id: artwork2.id, user_id: u3.id)
+c3 = Comment.create(body: "come to the dark side", artwork_id: artwork1.id, user_id: u3.id)
+c4 = Comment.create(body: "Where's my gf @", artwork_id: artwork3.id, user_id: u1.id)
+
+
