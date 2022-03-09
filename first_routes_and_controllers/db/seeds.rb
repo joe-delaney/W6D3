@@ -5,3 +5,9 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+# dropping tables
+User.destroy_all
+
+u1 = User.create(name: 'Luke', email: 'luke@hotmail.com')
+u2 = User.create(name: 'Leiah', email: 'leiah@hotmail.com')
