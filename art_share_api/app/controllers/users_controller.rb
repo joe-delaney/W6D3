@@ -1,3 +1,13 @@
+#      Prefix Verb   URI Pattern                Controller#Action
+#       users GET    /users(.:format)           users#index
+#             POST   /users(.:format)           users#create
+#   users_new GET    /users/new(.:format)       users#new
+#   edit_user GET    /users/:id/edit(.:format)  users#edit
+#        user GET    /users/:id(.:format)       users#show
+# update_user PATCH  /users/:id(.:format)       users#update
+#             DELETE /users/:id(.:format)       users#destroy
+
+
 class UsersController < ApplicationController
   def index
     @users = User.all
@@ -9,7 +19,7 @@ class UsersController < ApplicationController
     if @user.update(user_params)
       redirect_to update_user_url(@user)
     else
-      render json: @user.errors.full_messages
+      render json: @user.errors.full_messages, status: :unprocessable_entity
     end
   end
 
@@ -18,7 +28,7 @@ class UsersController < ApplicationController
     if @user.save
       render json: @user
     else
-      render json: @user.errors.full_messages
+      render json: @user.errors.full_messages, status: :unprocessable_entity
     end
       
   end
@@ -31,10 +41,14 @@ class UsersController < ApplicationController
   def destroy
     @user = User.find(params[:id])
     @user.destroy
-    redirect_to users_url
+    render json: @user
   end
+
+  private
 
   def user_params
     params.require(:user).permit(:username)
   end
+
+  
 end

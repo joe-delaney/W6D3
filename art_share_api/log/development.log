@@ -1280,3 +1280,170 @@ Migrating to CreateArtworkShares (20220309195804)
   [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 11], ["LIMIT", 1]]
   [1m[36mArtworkShare Load (0.7ms)[0m  [1m[34mSELECT "artwork_shares".* FROM "artwork_shares" WHERE "artwork_shares"."artwork_id" = $1[0m  [["artwork_id", 7]]
   [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT "users".* FROM "users" INNER JOIN "artwork_shares" ON "users"."id" = "artwork_shares"."viewer_id" WHERE "artwork_shares"."artwork_id" = $1[0m  [["artwork_id", 7]]
+Started POST "/users" for ::1 at 2022-03-09 15:36:01 -0500
+  [1m[35m (1.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /Users/appacademystudent/.rbenv/versions/2.5.1/lib/ruby/gems/2.5.0/gems/activerecord-5.2.6.3/lib/active_record/log_subscriber.rb:98
+Processing by UsersController#create as */*
+  Parameters: {"user"=>{"username"=>"'yoda'"}}
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/users_controller.rb:28
+  [1m[36mUser Exists (5.8ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."username" = $1 LIMIT $2[0m  [["username", "'yoda'"], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:28
+  [1m[36mUser Create (1.6ms)[0m  [1m[32mINSERT INTO "users" ("username", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "'yoda'"], ["created_at", "2022-03-09 20:36:02.308963"], ["updated_at", "2022-03-09 20:36:02.308963"]]
+  ↳ app/controllers/users_controller.rb:28
+  [1m[35m (1.0ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/users_controller.rb:28
+Completed 200 OK in 109ms (Views: 9.2ms | ActiveRecord: 23.6ms)
+
+
+Started GET "/users" for ::1 at 2022-03-09 15:36:10 -0500
+Processing by UsersController#index as */*
+  Parameters: {"user"=>{"username"=>"'yoda'"}}
+  [1m[36mUser Load (12.3ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/controllers/users_controller.rb:14
+Completed 200 OK in 18ms (Views: 5.2ms | ActiveRecord: 12.3ms)
+
+
+Started DELETE "/users/14" for ::1 at 2022-03-09 15:36:29 -0500
+Processing by UsersController#destroy as */*
+  Parameters: {"id"=>"14"}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 14], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:42
+  [1m[35m (1.9ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/users_controller.rb:43
+  [1m[36mArtwork Load (1.7ms)[0m  [1m[34mSELECT "artworks".* FROM "artworks" WHERE "artworks"."artist_id" = $1[0m  [["artist_id", 14]]
+  ↳ app/controllers/users_controller.rb:43
+  [1m[36mArtworkShare Load (2.3ms)[0m  [1m[34mSELECT "artwork_shares".* FROM "artwork_shares" WHERE "artwork_shares"."viewer_id" = $1[0m  [["viewer_id", 14]]
+  ↳ app/controllers/users_controller.rb:43
+  [1m[36mUser Destroy (0.7ms)[0m  [1m[31mDELETE FROM "users" WHERE "users"."id" = $1[0m  [["id", 14]]
+  ↳ app/controllers/users_controller.rb:43
+  [1m[35m (41.5ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/users_controller.rb:43
+Completed 200 OK in 188ms (Views: 1.0ms | ActiveRecord: 56.8ms)
+
+
+Started GET "/users" for ::1 at 2022-03-09 15:36:34 -0500
+Processing by UsersController#index as */*
+  [1m[36mUser Load (17.3ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/controllers/users_controller.rb:14
+Completed 200 OK in 21ms (Views: 2.9ms | ActiveRecord: 17.3ms)
+
+
+Started GET "/artworks" for ::1 at 2022-03-09 15:42:26 -0500
+  [1m[35m (2.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /Users/appacademystudent/.rbenv/versions/2.5.1/lib/ruby/gems/2.5.0/gems/activerecord-5.2.6.3/lib/active_record/log_subscriber.rb:98
+Processing by ArtworksController#index as */*
+  [1m[36mArtwork Load (1.1ms)[0m  [1m[34mSELECT "artworks".* FROM "artworks"[0m
+  ↳ app/controllers/artworks_controller.rb:4
+Completed 200 OK in 76ms (Views: 16.5ms | ActiveRecord: 32.2ms)
+
+
+Started GET "/artworks/7" for ::1 at 2022-03-09 15:42:42 -0500
+Processing by ArtworksController#show as */*
+  Parameters: {"id"=>"7"}
+  [1m[36mArtwork Load (1.3ms)[0m  [1m[34mSELECT  "artworks".* FROM "artworks" WHERE "artworks"."id" = $1 LIMIT $2[0m  [["id", 7], ["LIMIT", 1]]
+  ↳ app/controllers/artworks_controller.rb:27
+Completed 200 OK in 67ms (Views: 0.9ms | ActiveRecord: 2.3ms)
+
+
+Started PATCH "/artworks/7" for ::1 at 2022-03-09 15:43:17 -0500
+Processing by ArtworksController#update as */*
+  Parameters: {"artwork"=>{"title"=>"6AM"}, "id"=>"7"}
+  [1m[36mArtwork Load (86.8ms)[0m  [1m[34mSELECT  "artworks".* FROM "artworks" WHERE "artworks"."id" = $1 LIMIT $2[0m  [["id", 7], ["LIMIT", 1]]
+  ↳ app/controllers/artworks_controller.rb:8
+  [1m[35m (9.8ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/artworks_controller.rb:9
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 11], ["LIMIT", 1]]
+  ↳ app/controllers/artworks_controller.rb:9
+  [1m[36mArtwork Update (1.1ms)[0m  [1m[33mUPDATE "artworks" SET "title" = $1, "updated_at" = $2 WHERE "artworks"."id" = $3[0m  [["title", "6AM"], ["updated_at", "2022-03-09 20:43:17.408968"], ["id", 7]]
+  ↳ app/controllers/artworks_controller.rb:9
+  [1m[35m (3.2ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/artworks_controller.rb:9
+Redirected to http://localhost:3000/artworks/7
+Completed 302 Found in 394ms (ActiveRecord: 122.1ms)
+
+
+Started GET "/artworks/7" for ::1 at 2022-03-09 15:43:17 -0500
+Processing by ArtworksController#show as */*
+  Parameters: {"id"=>"7"}
+  [1m[36mArtwork Load (1.1ms)[0m  [1m[34mSELECT  "artworks".* FROM "artworks" WHERE "artworks"."id" = $1 LIMIT $2[0m  [["id", 7], ["LIMIT", 1]]
+  ↳ app/controllers/artworks_controller.rb:27
+Completed 200 OK in 6ms (Views: 1.0ms | ActiveRecord: 1.1ms)
+
+
+Started GET "/users" for ::1 at 2022-03-09 15:44:45 -0500
+Processing by UsersController#index as */*
+  [1m[36mUser Load (20.1ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/controllers/users_controller.rb:14
+Completed 200 OK in 24ms (Views: 3.3ms | ActiveRecord: 20.1ms)
+
+
+Started POST "/artworks" for ::1 at 2022-03-09 15:45:04 -0500
+Processing by ArtworksController#create as */*
+  Parameters: {"artwork"=>{"title"=>"Fruit Basket", "image_url"=>"https://i.ytimg.com/vi/dtbGlRngmLI/maxresdefault.jpg", "artist_id"=>"11"}}
+Unpermitted parameter: :artist_id
+  [1m[35m (22.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/artworks_controller.rb:18
+  [1m[35m (18.1ms)[0m  [1m[31mROLLBACK[0m
+  ↳ app/controllers/artworks_controller.rb:18
+Completed 422 Unprocessable Entity in 65ms (Views: 0.3ms | ActiveRecord: 40.5ms)
+
+
+Started POST "/artworks" for ::1 at 2022-03-09 16:05:47 -0500
+Processing by ArtworksController#create as */*
+  Parameters: {"artwork"=>{"title"=>"Fruit Basket", "image_url"=>"https://i.ytimg.com/vi/dtbGlRngmLI/maxresdefault.jpg"}}
+  [1m[36mUser Load (1.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/artworks_controller.rb:18
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/artworks_controller.rb:19
+  [1m[36mArtwork Create (2.8ms)[0m  [1m[32mINSERT INTO "artworks" ("title", "image_url", "artist_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["title", "Fruit Basket"], ["image_url", "https://i.ytimg.com/vi/dtbGlRngmLI/maxresdefault.jpg"], ["artist_id", 11], ["created_at", "2022-03-09 21:05:47.595846"], ["updated_at", "2022-03-09 21:05:47.595846"]]
+  ↳ app/controllers/artworks_controller.rb:19
+  [1m[35m (1.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/artworks_controller.rb:19
+Completed 200 OK in 120ms (Views: 0.9ms | ActiveRecord: 42.9ms)
+
+
+Started GET "/artworks" for ::1 at 2022-03-09 16:06:21 -0500
+Processing by ArtworksController#index as */*
+  Parameters: {"artwork"=>{"title"=>"Fruit Basket", "image_url"=>"https://i.ytimg.com/vi/dtbGlRngmLI/maxresdefault.jpg"}}
+  [1m[36mArtwork Load (23.7ms)[0m  [1m[34mSELECT "artworks".* FROM "artworks"[0m
+  ↳ app/controllers/artworks_controller.rb:4
+Completed 200 OK in 28ms (Views: 3.9ms | ActiveRecord: 23.7ms)
+
+
+Started DELETE "/artworks/10" for ::1 at 2022-03-09 16:06:30 -0500
+Processing by ArtworksController#destroy as */*
+  Parameters: {"artwork"=>{"title"=>"Fruit Basket", "image_url"=>"https://i.ytimg.com/vi/dtbGlRngmLI/maxresdefault.jpg"}, "id"=>"10"}
+  [1m[36mArtwork Load (8.7ms)[0m  [1m[34mSELECT  "artworks".* FROM "artworks" WHERE "artworks"."id" = $1 LIMIT $2[0m  [["id", 10], ["LIMIT", 1]]
+  ↳ app/controllers/artworks_controller.rb:33
+  [1m[35m (3.8ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/artworks_controller.rb:34
+  [1m[36mArtwork Destroy (43.2ms)[0m  [1m[31mDELETE FROM "artworks" WHERE "artworks"."id" = $1[0m  [["id", 10]]
+  ↳ app/controllers/artworks_controller.rb:34
+  [1m[35m (7.1ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/artworks_controller.rb:34
+Completed 200 OK in 106ms (Views: 0.7ms | ActiveRecord: 62.8ms)
+
+
+Started GET "/artworks" for ::1 at 2022-03-09 16:06:38 -0500
+Processing by ArtworksController#index as */*
+  Parameters: {"artwork"=>{"title"=>"Fruit Basket", "image_url"=>"https://i.ytimg.com/vi/dtbGlRngmLI/maxresdefault.jpg"}}
+  [1m[36mArtwork Load (47.0ms)[0m  [1m[34mSELECT "artworks".* FROM "artworks"[0m
+  ↳ app/controllers/artworks_controller.rb:4
+Completed 200 OK in 52ms (Views: 4.9ms | ActiveRecord: 47.0ms)
+
+
+Started POST "/artworks" for ::1 at 2022-03-09 16:07:52 -0500
+Processing by ArtworksController#create as */*
+  Parameters: {"artwork"=>{"title"=>"Fruit Basket", "image_url"=>"https://i.ytimg.com/vi/dtbGlRngmLI/maxresdefault.jpg", "artist_id"=>"11"}}
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/artworks_controller.rb:19
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 11], ["LIMIT", 1]]
+  ↳ app/controllers/artworks_controller.rb:19
+  [1m[36mArtwork Create (16.6ms)[0m  [1m[32mINSERT INTO "artworks" ("title", "image_url", "artist_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["title", "Fruit Basket"], ["image_url", "https://i.ytimg.com/vi/dtbGlRngmLI/maxresdefault.jpg"], ["artist_id", 11], ["created_at", "2022-03-09 21:07:52.734823"], ["updated_at", "2022-03-09 21:07:52.734823"]]
+  ↳ app/controllers/artworks_controller.rb:19
+  [1m[35m (1.9ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/artworks_controller.rb:19
+Completed 200 OK in 271ms (Views: 3.5ms | ActiveRecord: 56.8ms)
+
+
