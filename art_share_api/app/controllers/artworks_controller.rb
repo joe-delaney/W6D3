@@ -1,6 +1,7 @@
 class ArtworksController < ApplicationController
   def index
-    @artworks = Artwork.all
+    @user = User.find(params[:artist_id])
+    @artworks = @user.artworks + @user.shared_artworks
     render json: @artworks
   end
 

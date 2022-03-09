@@ -14,9 +14,11 @@ Rails.application.routes.draw do
 
   
   patch 'users/:id', to: 'users#update', as: "update_user"
+  get 'users/:artist_id/artworks', to: 'artworks#index'
   patch 'artworks/:id', to: 'artworks#update', as: "update_artwork"
   
   resources :users, only: [:create, :destroy, :index, :show, :update]
   resources :artworks, only: [:create, :destroy, :index, :show, :update]
+  resources :artwork_shares, only: [:index, :create, :destroy]
 
 end
