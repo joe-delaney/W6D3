@@ -1942,3 +1942,105 @@ Processing by CommentsController#index as */*
 Completed 200 OK in 56ms (Views: 4.3ms | ActiveRecord: 49.7ms)
 
 
+  [1m[36mUser Load (44.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE (users.username ILIKE %chbshdbhdfs OR
+      users.username ILIKE %chbshdbhdfs% OR
+      users.username ILIKE chbshdbhdfs%) LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mUser Load (6.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE (users.username ILIKE '%dchbschjb' OR
+      users.username ILIKE '%dchbschjb%' OR
+      users.username ILIKE 'dchbschjb%') LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mUser Load (2.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE (users.username ILIKE '%Yod' OR
+      users.username ILIKE '%Yod%' OR
+      users.username ILIKE 'Yod%') LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mUser Load (1.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE (users.username ILIKE '%a' OR
+      users.username ILIKE '%a%' OR
+      users.username ILIKE 'a%') LIMIT $1[0m  [["LIMIT", 1]]
+Started GET "/users?username=%27Luke%27" for ::1 at 2022-03-09 17:24:34 -0500
+  [1m[35m (1.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /Users/appacademystudent/.rbenv/versions/2.5.1/lib/ruby/gems/2.5.0/gems/activerecord-5.2.6.3/lib/active_record/log_subscriber.rb:98
+Processing by UsersController#index as */*
+  Parameters: {"username"=>"'Luke'"}
+  [1m[36mUser Load (5.9ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE (users.username ILIKE '%'Luke'' OR
+      users.username ILIKE '%'Luke'%' OR
+      users.username ILIKE ''Luke'%') LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:58
+Completed 500 Internal Server Error in 61ms (ActiveRecord: 8.7ms)
+
+
+
+ActiveRecord::StatementInvalid - PG::SyntaxError: ERROR:  syntax error at or near "Luke"
+LINE 1: ...ers".* FROM "users" WHERE (users.username ILIKE '%'Luke'' OR
+                                                              ^
+: SELECT  "users".* FROM "users" WHERE (users.username ILIKE '%'Luke'' OR
+      users.username ILIKE '%'Luke'%' OR
+      users.username ILIKE ''Luke'%') LIMIT $1:
+  app/controllers/users_controller.rb:58:in `search'
+  app/controllers/users_controller.rb:14:in `index'
+
+Started GET "/users?username=Luke" for ::1 at 2022-03-09 17:24:56 -0500
+Processing by UsersController#index as */*
+  Parameters: {"username"=>"Luke"}
+  [1m[36mUser Load (57.7ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE (users.username ILIKE '%Luke' OR
+      users.username ILIKE '%Luke%' OR
+      users.username ILIKE 'Luke%') LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:58
+Completed 200 OK in 128ms (Views: 0.8ms | ActiveRecord: 119.3ms)
+
+
+Started GET "/users?username=sabcsjhbcsjbadcj" for ::1 at 2022-03-09 17:25:01 -0500
+Processing by UsersController#index as */*
+  Parameters: {"username"=>"sabcsjhbcsjbadcj"}
+  [1m[36mUser Load (13.9ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE (users.username ILIKE '%sabcsjhbcsjbadcj' OR
+      users.username ILIKE '%sabcsjhbcsjbadcj%' OR
+      users.username ILIKE 'sabcsjhbcsjbadcj%') LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:58
+Completed 200 OK in 17ms (Views: 0.2ms | ActiveRecord: 13.9ms)
+
+
+Started GET "/users?username=oda" for ::1 at 2022-03-09 17:25:32 -0500
+Processing by UsersController#index as */*
+  Parameters: {"username"=>"oda"}
+  [1m[36mUser Load (35.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE (users.username ILIKE '%oda' OR
+      users.username ILIKE '%oda%' OR
+      users.username ILIKE 'oda%') LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:58
+Completed 200 OK in 38ms (Views: 0.8ms | ActiveRecord: 35.3ms)
+
+
+Started GET "/users?username=o" for ::1 at 2022-03-09 17:25:37 -0500
+Processing by UsersController#index as */*
+  Parameters: {"username"=>"o"}
+  [1m[36mUser Load (24.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE (users.username ILIKE '%o' OR
+      users.username ILIKE '%o%' OR
+      users.username ILIKE 'o%') LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:58
+Completed 200 OK in 27ms (Views: 0.5ms | ActiveRecord: 24.0ms)
+
+
+Started GET "/users?username=a" for ::1 at 2022-03-09 17:26:55 -0500
+  [1m[35m (1.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /Users/appacademystudent/.rbenv/versions/2.5.1/lib/ruby/gems/2.5.0/gems/activerecord-5.2.6.3/lib/active_record/log_subscriber.rb:98
+Processing by UsersController#index as */*
+  Parameters: {"username"=>"a"}
+Completed 200 OK in 8ms (Views: 0.3ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/users?username=artgh" for ::1 at 2022-03-09 17:27:00 -0500
+Processing by UsersController#index as */*
+  Parameters: {"username"=>"artgh"}
+  [1m[36mUser Load (11.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE (users.username ILIKE '%artgh' OR
+      users.username ILIKE '%artgh%' OR
+      users.username ILIKE 'artgh%') LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:59
+Completed 200 OK in 72ms (Views: 0.3ms | ActiveRecord: 41.6ms)
+
+
+Started GET "/users?username=luk" for ::1 at 2022-03-09 17:27:05 -0500
+Processing by UsersController#index as */*
+  Parameters: {"username"=>"luk"}
+  [1m[36mUser Load (5.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE (users.username ILIKE '%luk' OR
+      users.username ILIKE '%luk%' OR
+      users.username ILIKE 'luk%') LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:59
+Completed 200 OK in 78ms (Views: 1.4ms | ActiveRecord: 61.8ms)
+
+

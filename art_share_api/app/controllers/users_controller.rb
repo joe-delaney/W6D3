@@ -10,8 +10,12 @@
 
 class UsersController < ApplicationController
   def index
-    @users = User.all
-    render json: @users
+    if params[:username]
+      render json: search(params[:username])
+    else
+      @users = User.all
+      render json: @users
+    end
   end
 
   def update
@@ -50,5 +54,13 @@ class UsersController < ApplicationController
     params.require(:user).permit(:username)
   end
 
-  
+  def search(query)
+    return "Narrow your search, please" if query.length < 2
+    user = User.find_by("users.username ILIKE '%#{query}' OR
+      users.username ILIKE '%#{query}%' OR
+      users.username ILIKE '#{query}%'")
+
+    user.nil? ? "User not found" : user
+  end
+
 end
