@@ -19,4 +19,11 @@ class Comment < ApplicationRecord
   belongs_to :artwork,
     foreign_key: :artwork_id,
     class_name: :Artwork
+
+  # polymorphic association
+  has_many :likes, as: :likable
+
+  has_many :likers,
+    through: :likes,
+    source: :user
 end

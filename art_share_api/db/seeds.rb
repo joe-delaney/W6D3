@@ -11,6 +11,7 @@ User.destroy_all
 Artwork.destroy_all
 ArtworkShare.destroy_all
 Comment.destroy_all
+Like.destroy_all
 
 u1 = User.create(username: 'Luke')
 u2 = User.create(username: 'Leiah')
@@ -32,4 +33,11 @@ c2 = Comment.create(body: "This is Yoda", artwork_id: artwork2.id, user_id: u3.i
 c3 = Comment.create(body: "come to the dark side", artwork_id: artwork1.id, user_id: u3.id)
 c4 = Comment.create(body: "Where's my gf @", artwork_id: artwork3.id, user_id: u1.id)
 
-
+l1 = Like.create(liker_id: u1.id, likable: artwork2)
+l2 = Like.create(liker_id: u2.id, likable: artwork1)
+l3 = Like.create(liker_id: u3.id, likable: artwork3)
+l4 = Like.create(liker_id: u3.id, likable: artwork1)
+l5 = Like.create(liker_id: u3.id, likable: c1)
+l6 = Like.create(liker_id: u2.id, likable: c2)
+l7 = Like.create(liker_id: u3.id, likable: c4)
+l8 = Like.create(liker_id: u1.id, likable: c3)

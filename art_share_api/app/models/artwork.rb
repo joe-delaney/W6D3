@@ -29,4 +29,11 @@ class Artwork < ApplicationRecord
     foreign_key: :artwork_id,
     class_name: :Comment,
     dependent: :destroy
+
+  # polymorphic association
+  has_many :likes, as: :likable
+
+  has_many :likers,
+    through: :likes,
+    source: :user
 end

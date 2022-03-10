@@ -30,6 +30,19 @@ class User < ApplicationRecord
     class_name: :Comment,
     dependent: :destroy
 
+  has_many :likes, foreign_key: :liker_id
+
+  # polymorphic association
+  has_many :liked_artworks,
+    through: :likes,
+    source: :likable,
+    source_type: :Artwork
+
+  has_many :liked_comments,
+    through: :likes,
+    source: :likable,
+    source_type: :Comment
+
     def search(query)
       return "Narrow your search, please" if query.length < 2
       user = User.find_by("users.username ILIKE '%#{query}' OR

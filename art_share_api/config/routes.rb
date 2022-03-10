@@ -14,12 +14,17 @@ Rails.application.routes.draw do
 
   
   patch 'users/:id', to: 'users#update', as: "update_user"
-  get 'users/:artist_id/artworks', to: 'artworks#index'
   patch 'artworks/:id', to: 'artworks#update', as: "update_artwork"
   
   resources :users, only: [:create, :destroy, :index, :show, :update]
-  resources :artworks, only: [:create, :destroy, :index, :show, :update]
+  resources :artworks, only: [:create, :destroy, :show, :update]
   resources :artwork_shares, only: [:index, :create, :destroy]
   resources :comments, only: [:index, :create, :destroy]
+
+  # get 'users/:artist_id/artworks', to: 'artworks#index'
+  resources :users do 
+    resources :artworks, only: :index
+    resources :likes, only: :index
+  end
 
 end
