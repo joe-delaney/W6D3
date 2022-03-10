@@ -43,17 +43,28 @@ class User < ApplicationRecord
     source: :likable,
     source_type: :Comment
 
-    def search(query)
-      return "Narrow your search, please" if query.length < 2
-      user = User.find_by("users.username ILIKE '%#{query}' OR
-      users.username ILIKE '%#{query}%' OR
-      users.username ILIKE '#{query}%'")
+  # temporary solution
+  def favorite_artworks
+    artworks.where('artworks.favorite = True')
+    # artworks = self.artworks
+    # artworks.select { |artwork| artwork[:favorite] == true }
+  end
 
-      user.nil? ? "User not found" : user
-    end
+  def favorite_shared_artworks
+    shared_artworks.where('artwork_shares.favorite = True')
+  end
 
-    def all_artworks
-      self.artworks + self.shared_artworks
-    end
+  def search(query)
+    return "Narrow your search, please" if query.length < 2
+    user = User.find_by("users.username ILIKE '%#{query}' OR
+    users.username ILIKE '%#{query}%' OR
+    users.username ILIKE '#{query}%'")
+
+    user.nil? ? "User not found" : user
+  end
+
+  def all_artworks
+    self.artworks + self.shared_artworks
+  end
 
 end

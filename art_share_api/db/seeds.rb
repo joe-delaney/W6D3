@@ -18,13 +18,13 @@ u2 = User.create(username: 'Leiah')
 u3 = User.create(username: 'Yoda')
 
 
-artwork1 = Artwork.create(title: '5AM', image_url: 'https://ctl.s6img.com/society6/img/aMA6Lc2wS_uPkEhwbIsp4Ztue5U/w_1500/prints/~artwork/s6-0085/a/33323662_1741286/~~/5am-t1h-prints.jpg', artist_id: u1.id)
-artwork2 = Artwork.create(title: 'Coffee Time', image_url: 'https://images.fineartamerica.com/images/artworkimages/mediumlarge/1/coffee-time-rita-polizzi.jpg', artist_id: u2.id)
+artwork1 = Artwork.create(title: '5AM', image_url: 'https://ctl.s6img.com/society6/img/aMA6Lc2wS_uPkEhwbIsp4Ztue5U/w_1500/prints/~artwork/s6-0085/a/33323662_1741286/~~/5am-t1h-prints.jpg', artist_id: u1.id, favorite:true)
+artwork2 = Artwork.create(title: 'Coffee Time', image_url: 'https://images.fineartamerica.com/images/artworkimages/mediumlarge/1/coffee-time-rita-polizzi.jpg', artist_id: u2.id, favorite: true)
 artwork3 = Artwork.create(title: 'Mona Lisa', image_url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/Mona_Lisa%2C_by_Leonardo_da_Vinci%2C_from_C2RMF_retouched.jpg/1200px-Mona_Lisa%2C_by_Leonardo_da_Vinci%2C_from_C2RMF_retouched.jpg', artist_id: u2.id)
 
-artwork_share1 = ArtworkShare.create(artwork_id: artwork1.id, viewer_id: u2.id)
-artwork_share2 = ArtworkShare.create(artwork_id: artwork1.id, viewer_id: u3.id)
-artwork_share3 = ArtworkShare.create(artwork_id: artwork2.id, viewer_id: u1.id)
+artwork_share1 = ArtworkShare.create(artwork_id: artwork1.id, viewer_id: u2.id, favorite: true)
+artwork_share2 = ArtworkShare.create(artwork_id: artwork1.id, viewer_id: u3.id, favorite: true)
+artwork_share3 = ArtworkShare.create(artwork_id: artwork2.id, viewer_id: u1.id, favorite: true)
 artwork_share4 = ArtworkShare.create(artwork_id: artwork2.id, viewer_id: u3.id)
 artwork_share5 = ArtworkShare.create(artwork_id: artwork3.id, viewer_id: u1.id)
 
