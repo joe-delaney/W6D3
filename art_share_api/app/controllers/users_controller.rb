@@ -56,6 +56,18 @@ class UsersController < ApplicationController
     render json: User.find(params[:id]).favorite_shared_artworks
   end
 
+  def collections 
+    render json: User.find(params[:id]).collections
+  end
+
+  def collection_names
+    render json: User.find(params[:id]).collection_names
+  end
+
+  def artworks_in_collection 
+    render json: User.find(params[:id]).artworks_in_collection(params[:collection_name])
+  end
+
   private
 
   def user_params

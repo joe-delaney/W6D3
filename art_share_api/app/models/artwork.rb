@@ -36,4 +36,8 @@ class Artwork < ApplicationRecord
   has_many :likers,
     through: :likes,
     source: :user
+
+  has_many :collections, 
+    foreign_key: :artwork_id,
+    class_name: :Collection
 end

@@ -43,11 +43,20 @@ class User < ApplicationRecord
     source: :likable,
     source_type: :Comment
 
-  # temporary solution
+  has_many :collections, 
+    foreign_key: :collector_id,
+    class_name: :Collection
+
+  has_many :all_artworks_in_collections,
+    through: :collections,
+    source: :artworks
+
+  def collection_names
+    collections.select('collections.name').pluck('collections.name').uniq
+  end
+
   def favorite_artworks
     artworks.where('artworks.favorite = True')
-    # artworks = self.artworks
-    # artworks.select { |artwork| artwork[:favorite] == true }
   end
 
   def favorite_shared_artworks
@@ -65,6 +74,10 @@ class User < ApplicationRecord
 
   def all_artworks
     self.artworks + self.shared_artworks
+  end
+
+  def artworks_in_collection(collection_name)
+    all_artworks_in_collections.where("collections.name = ?", collection_name)
   end
 
 end
