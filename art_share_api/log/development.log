@@ -3429,3 +3429,80 @@ Migrating to UpdateFavorites3 (20220310163014)
   [1m[36mArtwork Load (0.8ms)[0m  [1m[34mSELECT "artworks".* FROM "artworks" WHERE "artworks"."artist_id" = $1 AND (artworks.favorite = True)[0m  [["artist_id", 27]]
   [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT  "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
   [1m[36mArtwork Load (1.5ms)[0m  [1m[34mSELECT "artworks".* FROM "artworks" INNER JOIN "artwork_shares" ON "artworks"."id" = "artwork_shares"."artwork_id" WHERE "artwork_shares"."viewer_id" = $1 AND (artwork_shares.favorite = True)[0m  [["viewer_id", 27]]
+Started GET "/users" for ::1 at 2022-03-10 11:52:33 -0500
+  [1m[35m (1.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /Users/appacademystudent/.rbenv/versions/2.5.1/lib/ruby/gems/2.5.0/gems/activerecord-5.2.6.3/lib/active_record/log_subscriber.rb:98
+Processing by UsersController#index as */*
+  [1m[36mUser Load (1.7ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/controllers/users_controller.rb:17
+Completed 200 OK in 130ms (Views: 22.3ms | ActiveRecord: 53.3ms)
+
+
+Started GET "/users/27/favorite_artworks" for ::1 at 2022-03-10 11:52:48 -0500
+Processing by UsersController#favorite_artworks as */*
+  Parameters: {"id"=>"27"}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 27], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:52
+  [1m[36mArtwork Load (13.7ms)[0m  [1m[34mSELECT "artworks".* FROM "artworks" WHERE "artworks"."artist_id" = $1 AND (artworks.favorite = True)[0m  [["artist_id", 27]]
+  ↳ app/controllers/users_controller.rb:52
+Completed 200 OK in 260ms (Views: 30.2ms | ActiveRecord: 136.2ms)
+
+
+Started GET "/users/27/shared_favorite_artworks" for ::1 at 2022-03-10 11:52:59 -0500
+Processing by UsersController#shared_favorite_artworks as */*
+  Parameters: {"id"=>"27"}
+  [1m[36mUser Load (16.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 27], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:56
+Completed 500 Internal Server Error in 63ms (ActiveRecord: 16.2ms)
+
+
+
+NoMethodError - undefined method `shared_favorite_artworks' for #<User:0x00007fa86ff667f0>
+Did you mean?  favorite_shared_artworks:
+  app/controllers/users_controller.rb:56:in `shared_favorite_artworks'
+
+Started GET "/users/27/favorite_shared_artworks" for ::1 at 2022-03-10 11:53:37 -0500
+  [1m[35m (1.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /Users/appacademystudent/.rbenv/versions/2.5.1/lib/ruby/gems/2.5.0/gems/activerecord-5.2.6.3/lib/active_record/log_subscriber.rb:98
+  
+ActionController::RoutingError (No route matches [GET] "/users/27/favorite_shared_artworks"):
+  
+actionpack (5.2.6.3) lib/action_dispatch/middleware/debug_exceptions.rb:65:in `call'
+web-console (3.7.0) lib/web_console/middleware.rb:135:in `call_app'
+web-console (3.7.0) lib/web_console/middleware.rb:30:in `block in call'
+web-console (3.7.0) lib/web_console/middleware.rb:20:in `catch'
+web-console (3.7.0) lib/web_console/middleware.rb:20:in `call'
+actionpack (5.2.6.3) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (5.2.6.3) lib/rails/rack/logger.rb:38:in `call_app'
+railties (5.2.6.3) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (5.2.6.3) lib/active_support/tagged_logging.rb:71:in `block in tagged'
+activesupport (5.2.6.3) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (5.2.6.3) lib/active_support/tagged_logging.rb:71:in `tagged'
+railties (5.2.6.3) lib/rails/rack/logger.rb:26:in `call'
+sprockets-rails (3.4.2) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (5.2.6.3) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (5.2.6.3) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.2.3) lib/rack/method_override.rb:24:in `call'
+rack (2.2.3) lib/rack/runtime.rb:22:in `call'
+activesupport (5.2.6.3) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (5.2.6.3) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (5.2.6.3) lib/action_dispatch/middleware/static.rb:127:in `call'
+rack (2.2.3) lib/rack/sendfile.rb:110:in `call'
+railties (5.2.6.3) lib/rails/engine.rb:524:in `call'
+puma (3.12.6) lib/puma/configuration.rb:227:in `call'
+puma (3.12.6) lib/puma/server.rb:706:in `handle_request'
+puma (3.12.6) lib/puma/server.rb:476:in `process_client'
+puma (3.12.6) lib/puma/server.rb:334:in `block in run'
+puma (3.12.6) lib/puma/thread_pool.rb:135:in `block in spawn_thread'
+Started GET "/users/27/favorite_shared_artworks" for ::1 at 2022-03-10 11:54:22 -0500
+  [1m[35m (3.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /Users/appacademystudent/.rbenv/versions/2.5.1/lib/ruby/gems/2.5.0/gems/activerecord-5.2.6.3/lib/active_record/log_subscriber.rb:98
+Processing by UsersController#favorite_shared_artworks as */*
+  Parameters: {"id"=>"27"}
+  [1m[36mUser Load (1.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 27], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:56
+  [1m[36mArtwork Load (2.3ms)[0m  [1m[34mSELECT "artworks".* FROM "artworks" INNER JOIN "artwork_shares" ON "artworks"."id" = "artwork_shares"."artwork_id" WHERE "artwork_shares"."viewer_id" = $1 AND (artwork_shares.favorite = True)[0m  [["viewer_id", 27]]
+  ↳ app/controllers/users_controller.rb:56
+Completed 200 OK in 240ms (Views: 42.8ms | ActiveRecord: 28.6ms)
+
+

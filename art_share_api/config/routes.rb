@@ -25,6 +25,8 @@ Rails.application.routes.draw do
   resources :users do 
     resources :artworks, only: :index
     resources :likes, only: :index
+    get 'favorite_artworks', on: :member
+    get 'favorite_shared_artworks', on: :member
   end
 
 end
